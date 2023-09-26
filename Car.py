@@ -58,28 +58,3 @@ class Car:
             angle = 180
         data = [servo_id, angle]
         self.__write_array(register, data)
-
-if __name__ == '__main__':
-    car = Car()
-    input = InputDriver(car)
-    input.enable(True)
-
-    while True:
-        pass
-
-
-    car.set_servo(1, 90)
-    time.sleep(0.5)
-
-    car.set_servo(2, 90)
-    time.sleep(0.5)
-
-    car.set_servo(1, 180)
-    time.sleep(0.5)
-
-    car.set_servo(2, 180)
-    time.sleep(0.5)
-
-    car.set_servo(1, 90)
-    time.sleep(0.5)
-    car.set_servo(2, 90)
