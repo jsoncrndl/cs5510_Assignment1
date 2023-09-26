@@ -1,4 +1,4 @@
-from pydualsense import pydualsense, TriggerModes, PlayerID
+from pydualsense import pydualsense, TriggerModes, PlayerID, LedOptions, PulseOptions, Brightness
 
 class ControllerInput:
     def __init__(self):
@@ -27,11 +27,15 @@ class ControllerInput:
     def enable(self, isOn = True):
         if isOn:
             self.ds.init()
+            self.ds.light.setBrightness(Brightness.low)
+
             if len(self.controlSchemes) == 0:
                 print("ControllerInput should not be enabled without any control schemes")
                 return
             self.set_control_scheme(self.currentControlScheme)
+            self.ds.triangle_pressed += self._triangle_pressed
         else:
+            self.ds.triangle_pressed -= self._triangle_pressed
             self.ds.close()
 
     def add_control_scheme(self, controlScheme):
@@ -47,11 +51,9 @@ class ControllerInput:
         
         # Update LED color
         self.ds.light.setColorT(controlScheme.color)
-        self.ds.light.setPlayerID(PlayerID.PLAYER_1)
 
         # Update trigger haptics        
-        # motorForce = max(0, min(controlScheme.motorForce, 255))        
-        motorForce = controlScheme.motorForce
+        motorForce = max(0, min(controlScheme.motorForce, 255))
 
         if controlScheme.motorForce == 0:
             self.ds.triggerL.setMode(TriggerModes.Off)
@@ -68,7 +70,7 @@ class ControllerInput:
         self._add_bindings()
 
     def toggle_control_scheme(self):
-        index = max(0, min(self.currentControlScheme + 1, len(self.controlSchemes) - 1))
+        index = (self.currentControlScheme + 1) % (len(self.controlSchemes))
         self.set_control_scheme(index)
 
     def _remove_bindings(self):
@@ -89,6 +91,10 @@ class ControllerInput:
                 continue
             self.bindingLookup[bindingKey] += (bindingValue)
             print(f"Binding {bindingKey}")
+
+    def _triangle_pressed(self, down):
+        if down:
+            self.toggle_control_scheme()
 
     class ControlScheme:
         def __init__(self, bindings, color = (0, 0, 255), motorForce = 255):

@@ -21,8 +21,8 @@ if __name__ == '__main__':
     # keyboardInput.add_press_listener('d', turn_right)
 
     controllerInput = ControllerInput()
-    controllerInput.add_control_scheme(ControllerInput.ControlScheme(color=(0, 255, 0), motorForce=0, bindings={}))
-    controllerInput.add_control_scheme(ControllerInput.ControlScheme(color=(0, 255, 255), motorForce=255, bindings={}))
+    controllerInput.add_control_scheme(ControllerInput.ControlScheme(color=(0, 255, 0), motorForce=255, bindings={}))
+    controllerInput.add_control_scheme(ControllerInput.ControlScheme(color=(0, 255, 255), motorForce=0, bindings={}))
     controllerInput.add_control_scheme(ControllerInput.ControlScheme(color=(255, 255, 0), motorForce=128, bindings={}))
     controllerInput.enable()
     while True:
