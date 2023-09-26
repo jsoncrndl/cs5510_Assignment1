@@ -1,11 +1,14 @@
 import smbus
 import time
 import math
+from InputDriver import InputDriver
 
 class Car:
+
     def __init__(self):
         self._addr = 0x16
         self._device = smbus.SMBus(1)
+        self.power = 10
 
     def __write_u8(self, register, data):
         try:
@@ -59,6 +62,12 @@ class Car:
 
 if __name__ == '__main__':
     car = Car()
+    input = InputDriver(car)
+    input.enable(True)
+
+    while(True)
+        pass
+
 
     car.set_servo(1, 90)
     time.sleep(0.5)
