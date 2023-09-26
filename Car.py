@@ -1,7 +1,6 @@
 import smbus
 import time
 import math
-from InputDriver import InputDriver
 
 class Car:
 
@@ -65,7 +64,7 @@ if __name__ == '__main__':
     input = InputDriver(car)
     input.enable(True)
 
-    while(True)
+    while True:
         pass
 
 
