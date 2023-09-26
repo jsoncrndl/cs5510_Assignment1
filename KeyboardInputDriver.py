@@ -1,5 +1,4 @@
 from pynput import keyboard
-from Car import Car
 
 class KeyboardInput:
 
