@@ -8,6 +8,8 @@ class Car:
         self._addr = 0x16
         self._device = smbus.SMBus(1)
         self.power = 10
+        self.last_left = 0
+        self.last_right = 0
 
     def __write_u8(self, register, data):
         try:
@@ -34,6 +36,10 @@ class Car:
 
         sets the motor with the speed given (not actually in unit, just a power amount)
         """
+
+        self.last_right = right
+        self.last_left = left
+
         register = 0x01
         left_direction = 0 if left < 0 else 1
         right_direction = 0 if right < 0 else 1
