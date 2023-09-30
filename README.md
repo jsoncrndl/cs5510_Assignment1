@@ -26,4 +26,4 @@ r - move in square
 ```
 
 ## Code structure
-The main code is located in [rasbot.py](raspbot.py). Input callbacks can be registered using events in the [KeyboardInput](KeyboardInputDriver.py) class. Code to control the car is located in is located in the [Car](Car.py) class.
+The main code is located in [rasbotControl.py](raspbotControl.py). Input callbacks can be registered using events in the [KeyboardInput](KeyboardInputDriver.py) class. Code to control the car is located in is located in the [Car](Car.py) class.
