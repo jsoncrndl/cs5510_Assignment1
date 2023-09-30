@@ -34,7 +34,7 @@ def move_square(down = True):
         return
 
     STRAIGHT_TIME = 2
-    STRAIGHT_POWER = 128
+    STRAIGHT_POWER = 60
 
     for i in range(0, 4):
         car.control_car(STRAIGHT_POWER, STRAIGHT_POWER) #Forward
