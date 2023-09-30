@@ -1,23 +1,21 @@
-import keyboard
+from sshkeyboard import listen_keyboard
 
 class KeyboardInput:
 
     def __init__(self):
-        keyboard.on_press(callback=self._on_press)
-        keyboard.on_release(callback=self._on_press)
-        self.listeners = {}
         self.enabled = False
+        self.listeners = {}
 
     def _on_press(self, key):
-        if self.enabled and key.name in self.listeners:
-            self.listeners[key.char](True)
+        if key in self.listeners:
+            self.listeners[key](True)
 
     def _on_release(self, key):
-        if self.enabled and key.name in self.listeners:
-            self.listeners[key.name](False)
+        if key in self.listeners:
+            self.listeners[key](False)
 
     def add_listener(self, key, function):
         self.listeners[key] = function
 
     def enable(self, isOn = True):
-        self.enabled = isOn
+        self.listenter = listen_keyboard(on_press=self._on_press, on_release=self._on_release, sequential=False)
