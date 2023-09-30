@@ -14,4 +14,13 @@ Install dependencies in virtual environment
 
 Run `rasbotControl.py` 
 
-use "wasd" keys to control the Rasbot
+## Controls
+```
+w - move forward
+s - move backward
+a - rotate left
+d - rotate right
+q - turn 90 degrees ccw
+e - turn 90 degrees cw
+r - move in square
+```
