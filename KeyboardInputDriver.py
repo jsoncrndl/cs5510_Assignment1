@@ -1,30 +1,25 @@
 from pynput import keyboard
-from Car import Car
 
 class KeyboardInput:
 
     def __init__(self):
         self.listener = keyboard.Listener(
-        on_press=self.on_press,
-        on_release=self.on_release)
+        on_press=self._on_press,
+        on_release=self._on_release)
         self.listeners = {}
 
-    def on_press(self, key):
-        for input, value in self.listeners.items():
-            if key == input: 
-                value()
-                return
+    def _on_press(self, key):
+        if hasattr(key, "char") and key.char in self.listeners:
+            self.listeners[key.char](True)
 
-    def on_release(self, key):
-        if key.char in "wasd":
-            self.car.control_car(0, 0)
+    def _on_release(self, key):
+        if hasattr(key, "char") and key.char in self.listeners:
+            self.listeners[key.char](False)
 
-    def add_press_listener(self, key, function):
-        pass
-    def add_release_listener(self, key, function):
-        pass
+    def add_listener(self, key, function):
+        self.listeners[key] = function
 
-    def enable(self, isOn):
+    def enable(self, isOn = True):
         if isOn:
             self.listener.start()
         else:
